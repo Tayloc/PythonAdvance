@@ -1,0 +1,11 @@
+数据库连接对象db的方法
+        db.commit() 提交到数据库执行
+        db.rollback()   回滚
+        cur = db.cursor()   返回游标对象，用于执行具体SQL命令
+        db.close()  关闭连接
+    游标对象cur的方法
+        cur.execute(sql命令,[列表]) 执行SQL命令
+        cur.close() 关闭游标对象
+        cur.fetchone()  获取查询结果集的第一条数据
+        cur.fetchmany(n)    获取n条
+        cur.fetchall()  获取所有记录
