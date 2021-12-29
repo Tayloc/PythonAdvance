@@ -1,5 +1,5 @@
 """
-re&pymysql 模块使用
+re_pymysql 模块使用
 
 regex = compile(pattern, flags=0)
     功能：生成正则表达式对象
@@ -16,7 +16,7 @@ regex.findall(string,pos,endpos)
         endpos 截取目标字符串的结束匹配位置
     返回值：匹配到的内容列表，如果正则表达式有子组则只能获取到子组对应的内容
 
-re&pymysql.findall(pattern, string, flags=0)
+re_pymysql.findall(pattern, string, flags=0)
     功能：根据正则表达式匹配目标字符串内容
     参数
         pattern 正则表达式
@@ -24,7 +24,7 @@ re&pymysql.findall(pattern, string, flags=0)
         flags 功能标志位，扩展正则表达式的匹配
     返回值：匹配到的内容列表，如果正则表达式有子组则只能获取到子组对应的内容
 
-re&pymysql.split(pattern, string, flags=0)
+re_pymysql.split(pattern, string, flags=0)
     功能：使用正则表达式匹配内容，切割目标字符串
     参数
         pattern 正则表达式
@@ -32,7 +32,7 @@ re&pymysql.split(pattern, string, flags=0)
         flags 功能标志位，扩展正则表达式的匹配
     返回值：切割后的内容列表
 
-re&pymysql.sub(pattern, replace, string, max, flags=0)
+re_pymysql.sub(pattern, replace, string, max, flags=0)
     功能：使用一个字符串替换正则表达式匹配到的内容
     参数
         pattern 正则表达式
@@ -42,7 +42,7 @@ re&pymysql.sub(pattern, replace, string, max, flags=0)
         flags 功能标志位，扩展正则表达式的匹配
     返回值：替换后的字符串
 
-re&pymysql.subn(pattern, replace, string, max, flags=0)
+re_pymysql.subn(pattern, replace, string, max, flags=0)
     功能：使用一个字符串替换正则表达式匹配到的内容
     参数
         pattern 正则表达式

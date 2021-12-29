@@ -2,7 +2,7 @@
 re模块 功能函数演示
 生成match对象的函数
 
-re&pymysql.finditer(pattern, string, flags=0)
+re_pymysql.finditer(pattern, string, flags=0)
     功能：根据正则表达式匹配目标字符串内容
     参数：
         pattern 正则表达式
@@ -10,21 +10,21 @@ re&pymysql.finditer(pattern, string, flags=0)
         flags 功能标志位，扩展正则表达式的匹配
     返回值：匹配结果的迭代器
 
-re&pymysql.fullmatch(pattern, string, flags=0)
+re_pymysql.fullmatch(pattern, string, flags=0)
     功能：完全匹配某个目标字符串
     参数：
         pattern 正则表达式
         string 目标字符串
     返回值：匹配内容match object
 
-re&pymysql.match(pattern, string, flags=0)
+re_pymysql.match(pattern, string, flags=0)
     功能：匹配某个目标字符串开始位置
     参数
         pattern 正则表达式
         string 目标字符串
     返回值：匹配内容match object
 
-re&pymysql.search(pattern, string, flags=0)
+re_pymysql.search(pattern, string, flags=0)
     功能：匹配目标字符串第一个符合内容
     参数：pattern 正则表达式；string 目标字符串
     返回值：匹配内容match object
