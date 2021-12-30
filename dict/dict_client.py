@@ -4,7 +4,7 @@ dict 客户端
 结构：一级界面 --> 注册 登录 退出
     二级界面 --> 查单词 历史记录 注销
 """
-
+import sys
 from socket import *
 from getpass import getpass  # 使用终端运行
 
@@ -13,6 +13,38 @@ ADDR = ('127.0.0.1', 8000)
 # tcp套接字
 s = socket()
 s.connect(ADDR)
+
+
+# 查单词
+def do_query(name):
+    while True:
+        word = input("单词：")
+        if word == "##":  # 结束单词查询
+            break
+        msg = "Q %s %s" % (name, word)
+        s.send(msg.encode())  # 发送请求
+        # 得到查询结果
+        data = s.recv(2048).decode()
+        print(data)
+
+
+# 二级界面，登录后的状态
+def login(name):
+    while True:
+        print("""
+          =============Query===========
+          1.查单词    2.历史记录    3.注销
+          =============================
+          """)
+        cmd = input("输入选项：")
+        if cmd == '1':
+            do_query(name)
+        elif cmd == '2':
+            pass
+        elif cmd == '3':
+            return
+        else:
+            print("请输入正确选项")
 
 
 # 注册函数
@@ -33,9 +65,25 @@ def do_register():
         data = s.recv(128).decode()  # 接收结果
         if data == 'OK':
             print("注册成功")
+            login(name)
         else:
             print("注册失败")
         return
+
+
+# 登录
+def do_login():
+    name = input("User:")
+    passwd = getpass()
+    msg = "L %s %s" % (name, passwd)
+    s.send(msg.encode())  # 发送请求
+    data = s.recv(128).decode()
+    if data == 'OK':
+        print("登录成功")
+        login(name)
+    else:
+        print("登录失败")
+
 
 # 搭建客户端网络
 def main():
@@ -51,8 +99,9 @@ def main():
         if cmd == '1':
             do_register()
         elif cmd == '2':
-            pass
+            do_login()
         elif cmd == '3':
-            pass
+            s.send(b"E")
+            sys.exit("谢谢使用")
         else:
             print("请输入正确选项")

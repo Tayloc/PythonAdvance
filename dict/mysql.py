@@ -55,3 +55,36 @@ class DataBase:
         except Exception:
             self.db.rollback()
             return False
+
+    # 登录处理
+    def login(self, name, passwd):
+        # 密码加密处理
+        hash = hashlib.md5((name + SALT).encode())  # 加盐
+        hash.update(passwd.encode())  # 算法加密
+        passwd = hash.hexdigest()  # 加密后的密码
+
+        # 数据库查找
+        sql = "select * from user where name = '%s' and passwd = '%s'" % (name, passwd)
+        self.cur.execute(sql)
+        r = self.cur.fetchone()
+        if r:  # 有数据则允许登录
+            return True
+        else:
+            return False
+
+    # 查单词
+    def query(self, word):
+        sql = "select mean from words where word = '%s'" % word
+        self.cur.execute(sql)
+        r = self.cur.fetchone()
+        if r:
+            return r[0]
+
+    # 插入历史记录
+    def insert_hist(self, name, word):
+        sql = "insert into hist (name,word) values (%s,%s)"
+        try:
+            self.cur.execute(sql, [name, word])
+            self.db.commit()
+        except Exception:
+            self.db.rollback()
