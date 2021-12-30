@@ -22,7 +22,7 @@ try:
 except FileNotFoundError as e:
     print(e)
 else:
-    fw = open('file.jpg', 'wb')
+    fw = open('01.file.jpg', 'wb')
     # 循环读取文件知道最后
     while True:
         data = fr.read(1024)

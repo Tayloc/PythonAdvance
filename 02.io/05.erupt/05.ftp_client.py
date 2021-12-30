@@ -95,8 +95,8 @@ def main():
     while True:
         print("\n===========命令选项===========")
         print("*****       list       *****")
-        print("*****     get file     *****")
-        print("*****     put file     *****")
+        print("*****     get 01.file     *****")
+        print("*****     put 01.file     *****")
         print("*****       quit       *****")
         print("===========命令选项===========")
 
