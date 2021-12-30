@@ -7,6 +7,8 @@ dict 服务端
 import sys, signal
 from socket import *
 from multiprocessing import Process
+from time import sleep
+
 from dict.mysql import DataBase
 
 # 全局变量
@@ -57,6 +59,24 @@ def do_query(c, data):
         c.send(msg.encode())
 
 
+# 历史记录
+def do_hist(c, data):
+    name = data.split(' ')[1]
+    r = db.history(name)  # 数据库处理
+    if not r:
+        c.send(b'Fail')
+        return
+    c.send(b'OK')
+
+    for i in r:
+        # i --> (name,word,time)
+        msg = "%s %-16s %s" % i
+        sleep(0.1)  # 防止粘包
+        c.send(msg.encode())
+    sleep(0.1)
+    c.send(b'##')  # 发送结束
+
+
 # 接收客户端请求，分配处理函数
 def request(c):
     db.create_cursor()  # 每个子进程单独生成游标
@@ -72,6 +92,8 @@ def request(c):
             do_login(c, data)
         elif data[0] == 'Q':
             do_query(c, data)
+        elif data[0] == 'H':
+            do_hist(c, data)
 
 
 # 搭建网络

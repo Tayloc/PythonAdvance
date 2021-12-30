@@ -88,3 +88,10 @@ class DataBase:
             self.db.commit()
         except Exception:
             self.db.rollback()
+
+    # 历史记录查询
+    def history(self, name):
+        sql = "select name,word,time from hist where name = '%s' order by time desc limit 10" % name
+        self.cur.execute(sql)
+        return self.cur.fetchall()  # 返回形式元组套元组
+
